@@ -1,4 +1,4 @@
-name: Build and Release kubectl-v12n-info
+name: Build and Release kubectl-v12n
 
 on:
   push:
@@ -47,9 +47,9 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          binary_name="kubectl-v12n-info"
+          binary_name="kubectl-v12n"
           if [ "${{ matrix.goos }}" = "windows" ]; then
-            binary_name="kubectl-v12n-info.exe"
+            binary_name="kubectl-v12n.exe"
           fi
           go build -o "${binary_name}" -ldflags "-X main.version=${{ github.ref_name }}" main.go
 
@@ -59,6 +59,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./kubectl-v12n-info${{ matrix.goos == 'windows' && '.exe' || '' }}
-          asset_name: kubectl-v12n-info-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.goos == 'windows' && '.exe' || '' }}
+          asset_path: ./kubectl-v12n${{ matrix.goos == 'windows' && '.exe' || '' }}
+          asset_name: kubectl-v12n-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.goos == 'windows' && '.exe' || '' }}
           asset_content_type: application/octet-stream
