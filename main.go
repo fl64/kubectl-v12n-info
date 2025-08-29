@@ -83,28 +83,28 @@ var (
 	vmName              string
 	showSystemResources bool
 	rootCmd             = &cobra.Command{
-		Use:   "vm-info [vm-name] [flags]",
+		Use:   "v12n [vm-name] [flags]",
 		Short: "Display information about VirtualMachines in Deckhouse Virtualization Platform",
 		Long: `A kubectl plugin to show hierarchical information about VirtualMachines, Pods, BlockDevices, PVCs, and PVs in one or all namespaces.
 
 Examples:
   # Show info for the current namespace (without system resources)
-  kubectl vm-info
+  kubectl v12n
 
   # Show info for the current namespace with pods, PVCs, and PVs
-  kubectl vm-info -S
+  kubectl v12n -S
 
   # Show info for a specific namespace
-  kubectl vm-info --namespace my-ns
+  kubectl v12n --namespace my-ns
 
   # Show info for a specific VM in the current namespace
-  kubectl vm-info my-vm
+  kubectl v12n my-vm
 
   # Show info for a specific VM with system resources
-  kubectl vm-info my-vm -S --namespace my-ns
+  kubectl v12n my-vm -S --namespace my-ns
 
   # Show info for all namespaces (without system resources)
-  kubectl vm-info --all-namespaces`,
+  kubectl v12n --all-namespaces`,
 		Args: cobra.MaximumNArgs(1),
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) > 0 {
